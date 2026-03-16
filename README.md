@@ -2,6 +2,8 @@
 
 A visual drag-and-drop landing page builder for React. Drop it into your app, wire up save/load, and get a full page editor with HTML export.
 
+![Landing Page Builder](./assets/screenshot.png)
+
 ## Install
 
 ```bash
