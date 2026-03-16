@@ -142,13 +142,13 @@ function ProjectName() {
 }
 ```
 
-## Storage plugins
+## Storage helpers
 
-Ready-made helpers that implement the `onSave` / `loadProject` / `fileManager` integrations for common backends:
+Ready-made helpers that implement the `fileManager` integration for common backends:
 
-| Plugin | Package |
+| Helper | Package |
 |---|---|
-| Firebase (Firestore + Storage) | [`packages/firebase`](./packages/firebase) |
+| Firebase Storage | [`packages/storage-helper-firebase`](./packages/storage-helper-firebase) |
 
 ---
 
@@ -156,8 +156,8 @@ Ready-made helpers that implement the `onSave` / `loadProject` / `fileManager` i
 
 ```
 packages/
-  sdk/       → @byte3-it/landing-page-builder   (the builder component)
-  firebase/  → @byte3-it/lpb-firebase           (Firebase storage plugin)
+  sdk/                      → @byte3-it/landing-page-builder   (the builder component)
+  storage-helper-firebase/  → @byte3-it/lpb-storage-firebase   (Firebase Storage helper)
 apps/
   demo/      → Vite demo app
 ```
