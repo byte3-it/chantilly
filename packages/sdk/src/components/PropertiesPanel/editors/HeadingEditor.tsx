@@ -42,7 +42,15 @@ export function HeadingEditor({ block }: Props) {
         label="Level"
         value={block.level}
         options={levelOptions}
-        onChange={(e) => update({ level: e.target.value as HeadingBlock['level'] })}
+        onChange={(e) => {
+          const level = e.target.value as HeadingBlock['level']
+          const sizeByLevel: Record<HeadingBlock['level'], string> = {
+            h1: 'text-4xl',
+            h2: 'text-2xl',
+            h3: 'text-xl',
+          }
+          update({ level, fontSize: sizeByLevel[level] })
+        }}
       />
       <Select
         label="Alignment"

@@ -13,7 +13,7 @@ export function createDefaultBlock(type: BlockType): Block {
         level: 'h2',
         textAlign: 'text-left',
         color: 'text-gray-900',
-        fontSize: 'text-3xl',
+        fontSize: 'text-2xl',
       }
     case 'text':
       return {
