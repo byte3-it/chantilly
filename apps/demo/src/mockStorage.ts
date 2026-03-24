@@ -1,4 +1,4 @@
-import type { Project } from '@byte3-it/landing-page-builder'
+import type { Project } from '@byte3-it/chantilly'
 
 const STORAGE_KEY = 'lpb_demo_project'
 

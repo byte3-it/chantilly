@@ -1,4 +1,4 @@
-import type { FileManagerConfig, ImageFile } from '@byte3-it/landing-page-builder'
+import type { FileManagerConfig, ImageFile } from '@byte3-it/chantilly'
 
 const MOCK_IMAGES: ImageFile[] = [
   { id: '1', url: 'https://picsum.photos/seed/alpha/800/400', name: 'landscape-alpha.jpg' },

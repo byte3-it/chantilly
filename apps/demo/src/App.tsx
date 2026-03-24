@@ -1,8 +1,8 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 import { Zap, ExternalLink } from 'lucide-react'
-import { LandingPageBuilder, exportToHtml } from '@byte3-it/landing-page-builder'
-import type { Project, CustomBlockDefinition, TemplateDefinition } from '@byte3-it/landing-page-builder'
+import { LandingPageBuilder, exportToHtml } from '@byte3-it/chantilly'
+import type { Project, CustomBlockDefinition, TemplateDefinition } from '@byte3-it/chantilly'
 import { saveProject, loadProject } from './mockStorage'
 import { mockFileManager } from './mockFileManager'
 

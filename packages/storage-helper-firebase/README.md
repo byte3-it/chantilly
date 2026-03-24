@@ -1,13 +1,13 @@
-# @byte3-it/lpb-storage-firebase
+# @byte3-it/@byte3-it/chantilly-storage-firebase
 
-Firebase Storage helper for [`@byte3-it/landing-page-builder`](../../README.md).
+Firebase Storage helper for [`@byte3-it/chantilly`](../../README.md).
 
 Stores and serves images from a **Firebase Storage** bucket, with a prefix to keep multiple apps or environments isolated.
 
 ## Install
 
 ```bash
-npm install @byte3-it/lpb-storage-firebase firebase
+npm install @byte3-it/@byte3-it/chantilly-storage-firebase firebase
 ```
 
 ## Usage
@@ -15,8 +15,8 @@ npm install @byte3-it/lpb-storage-firebase firebase
 ```tsx
 import { initializeApp } from 'firebase/app'
 import { getStorage } from 'firebase/storage'
-import { createFirebaseStorageHelper } from '@byte3-it/lpb-storage-firebase'
-import { LandingPageBuilder } from '@byte3-it/landing-page-builder'
+import { createFirebaseStorageHelper } from '@byte3-it/@byte3-it/chantilly-storage-firebase'
+import { LandingPageBuilder } from '@byte3-it/chantilly'
 
 const app = initializeApp({ /* your firebase config */ })
 

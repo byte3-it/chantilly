@@ -6,6 +6,6 @@ export default defineConfig({
   dts: true,
   sourcemap: true,
   clean: true,
-  external: ['firebase', 'firebase/storage', '@byte3-it/landing-page-builder'],
+  external: ['firebase', 'firebase/storage', '@byte3-it/chantilly'],
   treeshake: true,
 })

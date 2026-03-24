@@ -6,7 +6,7 @@ import {
   deleteObject,
 } from 'firebase/storage'
 import type { FirebaseStorage } from 'firebase/storage'
-import type { FileManagerConfig, ImageFile } from '@byte3-it/landing-page-builder'
+import type { FileManagerConfig, ImageFile } from '@byte3-it/chantilly'
 
 // ─── Public types ────────────────────────────────────────────────────────────
 
