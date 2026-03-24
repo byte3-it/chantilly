@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 import { Zap, ExternalLink } from 'lucide-react'
-import { LandingPageBuilder, exportToHtml } from '@byte3-it/chantilly'
+import { LandingPageBuilder, LandingPageRenderer, exportToHtml } from '@byte3-it/chantilly'
 import type { Project, CustomBlockDefinition, TemplateDefinition } from '@byte3-it/chantilly'
 import { saveProject, loadProject } from './mockStorage'
 import { mockFileManager } from './mockFileManager'
@@ -216,10 +216,9 @@ const DEMO_PROJECT: Project = {
 }
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
-    isActive
-      ? 'border-blue-500 text-blue-600'
-      : 'border-transparent text-gray-500 hover:text-gray-700'
+  `px-4 py-3 text-sm font-medium border-b-2 transition-colors ${isActive
+    ? 'border-blue-500 text-blue-600'
+    : 'border-transparent text-gray-500 hover:text-gray-700'
   }`
 
 function AppBar() {
@@ -266,17 +265,15 @@ function JsonPage() {
 
 function HtmlPage() {
   const project = loadProject() ?? DEMO_PROJECT
-  const html = exportToHtml(project)
+  // return <LandingPageRenderer project={project} className="max-w-2xl mx-auto px-6 py-12" />
   return (
     <div className="h-full flex flex-col">
       <div className="px-4 py-2.5 border-b border-gray-200 bg-white shrink-0">
-        <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">HTML Preview</span>
+        <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Renderer Preview</span>
       </div>
-      <iframe
-        srcDoc={html}
-        className="flex-1 w-full border-0"
-        title="HTML Preview"
-      />
+      <div className="flex-1 overflow-auto">
+        <LandingPageRenderer project={project} className="max-w-2xl mx-auto px-6 py-12" />
+      </div>
     </div>
   )
 }

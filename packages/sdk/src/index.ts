@@ -2,6 +2,10 @@
 export { LandingPageBuilder } from './components/LandingPageBuilder'
 export type { LandingPageBuilderProps } from './components/LandingPageBuilder'
 
+// Renderer
+export { LandingPageRenderer } from './components/LandingPageRenderer/LandingPageRenderer'
+export type { LandingPageRendererProps } from './components/LandingPageRenderer/LandingPageRenderer'
+
 // Types
 export type {
   Block,
