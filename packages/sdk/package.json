@@ -1,13 +1,19 @@
 {
   "name": "@byte3-it/chantilly",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A React landing page builder component",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/byte3-it/chantilly"
   },
-  "keywords": ["react", "landing-page", "builder", "drag-and-drop", "editor"],
+  "keywords": [
+    "react",
+    "landing-page",
+    "builder",
+    "drag-and-drop",
+    "editor"
+  ],
   "type": "module",
   "exports": {
     ".": {
