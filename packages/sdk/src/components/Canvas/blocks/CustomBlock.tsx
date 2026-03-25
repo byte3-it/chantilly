@@ -38,7 +38,11 @@ export function CustomBlock({ block, isSelected, onClick }: Props) {
       }`}
     >
       <div className={alignClass}>
-        {block.elementType === 'link' ? (
+        {block.elementType === 'text' ? (
+          <span className={`inline-block ${sizeClasses[block.size]}`}>
+            {block.label || 'Text'}
+          </span>
+        ) : block.elementType === 'link' ? (
           <span className={`inline-block font-medium underline text-blue-600 ${sizeClasses[block.size]}`}>
             {block.label || 'Link'}
           </span>

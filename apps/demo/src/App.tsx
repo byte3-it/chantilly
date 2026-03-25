@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
-import { Zap, ExternalLink } from 'lucide-react'
+import { Zap, ExternalLink, Type } from 'lucide-react'
 import { LandingPageBuilder, LandingPageRenderer, exportToHtml } from '@byte3-it/chantilly'
 import type { Project, CustomBlockDefinition, TemplateDefinition } from '@byte3-it/chantilly'
 import { saveProject, loadProject } from './mockStorage'
@@ -34,6 +34,17 @@ const CUSTOM_BLOCKS: CustomBlockDefinition[] = [
       textAlign: 'text-left',
       rel: 'noopener noreferrer',
       target: '_blank',
+    },
+  },
+  {
+    id: 'fine-print',
+    label: 'Fine Print',
+    icon: <Type size={16} />,
+    elementType: 'text',
+    defaults: {
+      label: 'No credit card required. Cancel anytime.',
+      size: 'sm',
+      textAlign: 'text-center',
     },
   },
 ]

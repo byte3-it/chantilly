@@ -5,7 +5,7 @@ export interface CustomBlockDefinition {
   id: string
   label: string
   icon?: ReactNode
-  elementType: 'button' | 'link'
+  elementType: 'button' | 'link' | 'text'
   defaults?: {
     label?: string
     href?: string
@@ -20,7 +20,7 @@ export interface CustomBlock {
   id: string
   type: 'custom'
   definitionId: string
-  elementType: 'button' | 'link'
+  elementType: 'button' | 'link' | 'text'
   label: string
   href: string
   variant: 'primary' | 'secondary'

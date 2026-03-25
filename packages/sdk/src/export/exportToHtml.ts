@@ -81,6 +81,9 @@ function renderBlock(block: Block, s: ProjectSettings): string {
           : ''
       const wrapper = alignClass ? `<div class="${alignClass}">` : ''
       const wrapperClose = alignClass ? '</div>' : ''
+      if (block.elementType === 'text') {
+        return `    ${wrapper}<span class="inline-block ${sizes[block.size]} mb-4">${escape(block.label)}</span>${wrapperClose}`
+      }
       if (block.elementType === 'link') {
         return `    ${wrapper}<a href="${escape(block.href)}" class="inline-block font-medium underline text-blue-600 ${sizes[block.size]} mb-4">${escape(block.label)}</a>${wrapperClose}`
       }
