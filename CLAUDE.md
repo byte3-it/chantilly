@@ -26,6 +26,17 @@ npm run build        # tsc + vite build
 
 There are no tests in this repo.
 
+## Releasing a new version
+
+Publishing is triggered by pushing an annotated git tag. Both steps below are required — skipping either will cause the CI publish to fail.
+
+1. Bump the version in `packages/sdk/package.json`
+2. Commit: `git commit -m "chore: bump sdk to vX.Y.Z"`
+3. Create an annotated tag: `git tag -a vX.Y.Z -m "vX.Y.Z"`
+4. Push branch and tags: `git push origin main --tags`
+
+> The GitHub Action reads the version from `package.json` and publishes that. If the tag and `package.json` version are out of sync the publish will fail with "cannot publish over previously published version".
+
 ## Architecture
 
 This is a **monorepo** (Turborepo + npm workspaces) containing:
