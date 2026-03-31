@@ -256,6 +256,7 @@ function BuilderPage() {
       fileManager={mockFileManager}
       customBlocks={CUSTOM_BLOCKS}
       templates={TEMPLATES}
+    // disabled
     />
   )
 }

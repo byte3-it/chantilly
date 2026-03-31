@@ -26,6 +26,7 @@ import { TemplatesContext } from "./TemplatesContext";
 import { TemplatesModal } from "./Templates/TemplatesModal";
 import { ProjectSettingsPanel } from "./ProjectSettings/ProjectSettingsPanel";
 import { PreviewModeContext, type PreviewMode } from "./PreviewModeContext";
+import { ReadOnlyContext } from "./ReadOnlyContext";
 import { Button } from "./ui/Button";
 
 export interface LandingPageBuilderProps {
@@ -34,6 +35,8 @@ export interface LandingPageBuilderProps {
   fileManager?: FileManagerConfig;
   customBlocks?: CustomBlockDefinition[];
   templates?: TemplateDefinition[];
+  /** When true, all editing interactions are disabled and the UI is visually grayed out. */
+  disabled?: boolean;
 }
 
 export function LandingPageBuilder({
@@ -42,6 +45,7 @@ export function LandingPageBuilder({
   fileManager,
   customBlocks = [],
   templates = [],
+  disabled = false,
 }: LandingPageBuilderProps) {
   const { project, history, loadProject, addBlock, addBlockDirect, moveBlock, updateProject, undo } = useBuilderStore();
   const [previewMode, setPreviewMode] = useState<PreviewMode>("desktop");
@@ -94,11 +98,12 @@ export function LandingPageBuilder({
   };
 
   return (
+    <ReadOnlyContext.Provider value={disabled}>
     <TemplatesContext.Provider value={templates}>
       <CustomBlocksContext.Provider value={customBlocks}>
         <PreviewModeContext.Provider value={previewMode}>
           <FileManagerContext.Provider value={fileManager ?? null}>
-            <div className="flex h-screen flex-col bg-gray-100 font-sans">
+            <div className={`flex h-screen flex-col bg-gray-100 font-sans${disabled ? ' opacity-60 pointer-events-none select-none' : ''}`}>
               {/* Toolbar */}
               <div className="flex items-center gap-3 px-4 py-2.5 bg-white border-b border-gray-200 shrink-0">
                 <div className="flex-1">
@@ -178,5 +183,6 @@ export function LandingPageBuilder({
         </PreviewModeContext.Provider>
       </CustomBlocksContext.Provider>
     </TemplatesContext.Provider>
+    </ReadOnlyContext.Provider>
   );
 }
