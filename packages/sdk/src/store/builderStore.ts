@@ -3,13 +3,14 @@ import type { Block, BlockType, Project, ProjectSettings } from '../types/projec
 import { DEFAULT_PROJECT_SETTINGS } from '../types/project'
 import { createDefaultBlock } from '../lib/blockDefaults'
 import { generateId } from '../lib/generateId'
-import { exportToHtml } from '../export/exportToHtml'
+import { exportProject } from '../export/exportProject'
 
 const MAX_HISTORY = 20
 
 const defaultProject: Project = {
   id: generateId(),
   name: 'Untitled Project',
+  mode: 'web',
   meta: {
     title: 'My Landing Page',
     description: '',
@@ -146,6 +147,6 @@ export const useBuilderStore = create<BuilderState>((set, get) => ({
   },
 
   exportHtml: () => {
-    return exportToHtml(get().project)
+    return exportProject(get().project)
   },
 }))

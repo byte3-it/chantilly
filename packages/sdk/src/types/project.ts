@@ -94,6 +94,7 @@ export type Block =
 export interface Project {
   id: string
   name: string
+  mode: 'web' | 'email'
   meta: {
     title: string
     description: string

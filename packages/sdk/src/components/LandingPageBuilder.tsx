@@ -37,6 +37,8 @@ export interface LandingPageBuilderProps {
   templates?: TemplateDefinition[];
   /** When true, all editing interactions are disabled and the UI is visually grayed out. */
   disabled?: boolean;
+  /** Controls the export target. 'web' uses Tailwind CDN; 'email' uses inline styles. Defaults to 'web'. */
+  mode?: 'web' | 'email';
 }
 
 export function LandingPageBuilder({
@@ -46,6 +48,7 @@ export function LandingPageBuilder({
   customBlocks = [],
   templates = [],
   disabled = false,
+  mode = 'web',
 }: LandingPageBuilderProps) {
   const { project, history, loadProject, addBlock, addBlockDirect, moveBlock, updateProject, undo } = useBuilderStore();
   const [previewMode, setPreviewMode] = useState<PreviewMode>("desktop");
@@ -60,6 +63,11 @@ export function LandingPageBuilder({
       loadProject(initialProject);
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Sync mode prop into project
+  useEffect(() => {
+    updateProject({ mode });
+  }, [mode]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;

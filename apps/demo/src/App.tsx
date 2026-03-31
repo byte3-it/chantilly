@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 import { Zap, ExternalLink, Type } from 'lucide-react'
-import { LandingPageBuilder, LandingPageRenderer, exportToHtml } from '@byte3-it/chantilly'
+import { LandingPageBuilder, LandingPageRenderer, exportProject } from '@byte3-it/chantilly'
 import type { Project, CustomBlockDefinition, TemplateDefinition } from '@byte3-it/chantilly'
-import { exportToEmail } from '@byte3-it/chantilly/export'
 import { saveProject, loadProject } from './mockStorage'
 import { mockFileManager } from './mockFileManager'
 
@@ -58,6 +57,7 @@ const TEMPLATES: TemplateDefinition[] = [
     project: {
       id: 'tpl-saas',
       name: 'SaaS Landing Page',
+      mode: 'web',
       meta: { title: 'The Best SaaS Tool', description: 'Supercharge your workflow today.', lang: 'en' },
       settings: {
         backgroundColor: '#0f172a',
@@ -104,6 +104,7 @@ const TEMPLATES: TemplateDefinition[] = [
     project: {
       id: 'tpl-event',
       name: 'DevConf 2026',
+      mode: 'web',
       meta: { title: 'DevConf 2026 — The Developer Conference', description: 'The premier conference for developers. September 15–16, 2026 · Austin, TX.', lang: 'en' },
       settings: {
         backgroundColor: '#0c0a1e',
@@ -180,6 +181,7 @@ const TEMPLATES: TemplateDefinition[] = [
 const DEMO_PROJECT: Project = {
   id: 'demo-project-1',
   name: 'My Landing Page',
+  mode: 'web',
   meta: {
     title: 'Welcome to My Landing Page',
     description: 'A demo landing page built with the landing page builder',
@@ -233,32 +235,53 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     : 'border-transparent text-gray-500 hover:text-gray-700'
   }`
 
-function AppBar() {
+function AppBar({ mode, onModeChange }: { mode: 'web' | 'email'; onModeChange: (m: 'web' | 'email') => void }) {
+  const isEmail = mode === 'email'
+  const disabledTabCls = 'px-4 py-3 text-sm font-medium border-b-2 border-transparent text-gray-300 cursor-not-allowed select-none'
+
   return (
     <header className="flex items-center px-4 bg-white border-b border-gray-200 shrink-0">
       <span className="text-sm font-semibold text-gray-800 mr-6">Landing Page Builder</span>
       <NavLink to="/" end className={navLinkClass}>Builder</NavLink>
       <NavLink to="/json" className={navLinkClass}>JSON</NavLink>
-      <NavLink to="/html" className={navLinkClass}>HTML Preview</NavLink>
-      <NavLink to="/send-email" className={navLinkClass}>Send Email</NavLink>
+      {isEmail
+        ? <span className={disabledTabCls} title="Not available in email mode">HTML Preview</span>
+        : <NavLink to="/html" className={navLinkClass}>HTML Preview</NavLink>
+      }
+      {isEmail
+        ? <NavLink to="/send-email" className={navLinkClass}>Send Email</NavLink>
+        : <span className={disabledTabCls} title="Not available in web mode">Send Email</span>
+      }
+      {/* Dev-only mode switch */}
+      <div className="ml-auto flex items-center gap-2 text-xs text-gray-400">
+        <span>mode:</span>
+        <button
+          onClick={() => onModeChange('web')}
+          className={`px-2 py-0.5 rounded ${mode === 'web' ? 'bg-blue-100 text-blue-700 font-medium' : 'hover:text-gray-600'}`}
+        >web</button>
+        <button
+          onClick={() => onModeChange('email')}
+          className={`px-2 py-0.5 rounded ${mode === 'email' ? 'bg-blue-100 text-blue-700 font-medium' : 'hover:text-gray-600'}`}
+        >email</button>
+      </div>
     </header>
   )
 }
 
-function BuilderPage() {
+function BuilderPage({ mode }: { mode: 'web' | 'email' }) {
   return (
     <LandingPageBuilder
       initialProject={loadProject() ?? DEMO_PROJECT}
       onSave={(project: Project) => {
         saveProject(project)
-        const html = exportToHtml(project)
+        const html = exportProject(project)
         console.log('[demo] exported HTML length:', html.length)
         alert('Project saved to localStorage!')
       }}
       fileManager={mockFileManager}
       customBlocks={CUSTOM_BLOCKS}
       templates={TEMPLATES}
-    // disabled
+      mode={mode}
     />
   )
 }
@@ -332,7 +355,7 @@ function SendEmailPage() {
     setErrorMsg('')
 
     try {
-      const html = exportToEmail(project)
+      const html = exportProject(project)
       const form = new FormData()
       form.append('from', `Chantilly Demo <mailgun@${domain}>`)
       form.append('to', to)
@@ -421,13 +444,15 @@ function SendEmailPage() {
 }
 
 export default function App() {
+  const [mode, setMode] = useState<'web' | 'email'>('web')
+
   return (
     <BrowserRouter>
       <div className="flex flex-col h-screen overflow-hidden">
-        <AppBar />
+        <AppBar mode={mode} onModeChange={setMode} />
         <div className="flex-1 min-h-0 overflow-hidden">
           <Routes>
-            <Route path="/" element={<BuilderPage />} />
+            <Route path="/" element={<BuilderPage mode={mode} />} />
             <Route path="/json" element={<JsonPage />} />
             <Route path="/html" element={<HtmlPage />} />
             <Route path="/send-email" element={<SendEmailPage />} />

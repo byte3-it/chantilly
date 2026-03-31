@@ -52,8 +52,10 @@ function CustomPaletteItem({ def }: { def: CustomBlockDefinition }) {
 }
 
 export function Sidebar() {
-  const { addBlock } = useBuilderStore();
+  const { addBlock, project } = useBuilderStore();
   const customBlocks = useContext(CustomBlocksContext);
+  const isEmail = project.mode === 'email';
+  const visibleBlockTypes = BLOCK_TYPES.filter((b) => !(isEmail && b.type === 'countdown'));
 
   return (
     <div className="w-64 bg-white border-r border-gray-200 flex flex-col">
@@ -71,7 +73,7 @@ export function Sidebar() {
       )}
       <div className="flex-1 overflow-y-auto p-2">
         <div className="flex flex-col gap-0.5">
-          {BLOCK_TYPES.map(({ type, label, icon }) => (
+          {visibleBlockTypes.map(({ type, label, icon }) => (
             <BlockPaletteItem key={type} type={type} label={label} icon={icon} onClick={() => addBlock(type)} />
           ))}
         </div>

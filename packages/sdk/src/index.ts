@@ -30,8 +30,9 @@ export { createCustomBlock } from './lib/createCustomBlock'
 // Store
 export { useBuilderStore } from './store/builderStore'
 
-// Export util
+// Export utils
 export { exportToHtml } from './export/exportToHtml'
+export { exportProject } from './export/exportProject'
 
 // Lib
 export { generateId } from './lib/generateId'
