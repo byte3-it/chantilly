@@ -72,11 +72,13 @@ export function LandingPageBuilder({
     };
 
     if (activeData.source === "palette") {
+      const overId = over.id as string;
+      const afterId = overId !== "canvas-droppable" ? overId : undefined;
       if (activeData.customBlockDefId) {
         const def = customBlocks.find((d) => d.id === activeData.customBlockDefId);
-        if (def) addBlockDirect(createCustomBlock(def));
+        if (def) addBlockDirect(createCustomBlock(def), afterId);
       } else if (activeData.type) {
-        addBlock(activeData.type as Parameters<typeof addBlock>[0]);
+        addBlock(activeData.type as Parameters<typeof addBlock>[0], afterId);
       }
       return;
     }

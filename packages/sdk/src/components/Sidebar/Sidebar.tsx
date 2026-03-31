@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useDraggable } from "@dnd-kit/core";
-import { Type, AlignLeft, Image, MousePointer, Minus, Square, Timer } from "lucide-react";
+import { Type, AlignLeft, Image, MousePointer, Minus, Square, Timer, Plus } from "lucide-react";
 import type { BlockType } from "../../types/project";
 import { useBuilderStore } from "../../store/builderStore";
 import { BlockPaletteItem } from "./BlockPaletteItem";
@@ -26,18 +26,28 @@ function CustomPaletteItem({ def }: { def: CustomBlockDefinition }) {
   });
 
   return (
-    <button
-      ref={setNodeRef}
-      {...listeners}
-      {...attributes}
-      onClick={() => addBlockDirect(createCustomBlock(def))}
-      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium text-violet-700 hover:bg-violet-50 transition-colors cursor-grab active:cursor-grabbing text-left ${
+    <div
+      className={`group flex items-center gap-3 px-3 py-2.5 rounded-md hover:bg-violet-50 transition-colors ${
         isDragging ? "opacity-50" : ""
       }`}
     >
-      <span className="text-violet-500 flex-shrink-0">{def.icon}</span>
-      {def.label}
-    </button>
+      <div
+        ref={setNodeRef}
+        {...listeners}
+        {...attributes}
+        className="flex items-center gap-3 flex-1 cursor-grab active:cursor-grabbing min-w-0"
+      >
+        <span className="text-violet-500 flex-shrink-0">{def.icon}</span>
+        <span className="text-sm font-medium text-violet-700 truncate">{def.label}</span>
+      </div>
+      <button
+        onClick={() => addBlockDirect(createCustomBlock(def))}
+        className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 p-0.5 rounded hover:bg-violet-100 text-violet-500 hover:text-violet-800"
+        title={`Add ${def.label}`}
+      >
+        <Plus size={14} />
+      </button>
+    </div>
   );
 }
 
