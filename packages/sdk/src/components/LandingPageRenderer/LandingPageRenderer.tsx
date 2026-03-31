@@ -210,11 +210,13 @@ export function LandingPageRenderer({ project, className }: LandingPageRendererP
       className={className}
       style={{ backgroundColor: settings.backgroundColor }}
     >
-      {project.blocks.map((block) => (
-        <div key={block.id}>
-          <RenderBlock block={block} settings={settings} />
-        </div>
-      ))}
+      <div className="flex flex-col gap-4">
+        {project.blocks.map((block) => (
+          <div key={block.id}>
+            <RenderBlock block={block} settings={settings} />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
