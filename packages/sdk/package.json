@@ -1,6 +1,6 @@
 {
   "name": "@byte3-it/chantilly",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "A React landing page builder component",
   "license": "MIT",
   "repository": {
@@ -20,6 +20,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./export": {
+      "types": "./dist/export/index.d.ts",
+      "import": "./dist/export/index.js",
+      "require": "./dist/export/index.cjs"
     }
   },
   "main": "./dist/index.cjs",

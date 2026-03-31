@@ -13,10 +13,10 @@ function renderBlock(block: Block, s: ProjectSettings): string {
   switch (block.type) {
     case 'heading': {
       const tag = block.level
-      return `    <${tag} class="${block.textAlign} ${block.color} ${block.fontSize} font-bold mb-4">${escape(block.text)}</${tag}>`
+      return `    <${tag} class="${block.textAlign} ${block.color} ${block.fontSize} font-bold">${escape(block.text)}</${tag}>`
     }
     case 'text': {
-      return `    <p class="${block.textAlign} ${block.color} ${block.fontSize} mb-4">${escape(block.content)}</p>`
+      return `    <p class="${block.textAlign} ${block.color} ${block.fontSize}">${escape(block.content)}</p>`
     }
     case 'image': {
       if (!block.src) return ''
@@ -28,7 +28,7 @@ function renderBlock(block: Block, s: ProjectSettings): string {
           : ''
       const wrapper = wrapAlign ? `<div class="${wrapAlign}">` : ''
       const wrapperClose = wrapAlign ? '</div>' : ''
-      return `    ${wrapper}<img src="${escape(block.src)}" alt="${escape(block.alt)}" class="${block.width} h-auto mb-4" />${wrapperClose}`
+      return `    ${wrapper}<img src="${escape(block.src)}" alt="${escape(block.alt)}" class="${block.width} h-auto" />${wrapperClose}`
     }
     case 'button': {
       const sizes = { sm: 'px-3 py-1.5 text-sm', md: 'px-5 py-2 text-base', lg: 'px-7 py-3 text-lg' }
@@ -44,10 +44,10 @@ function renderBlock(block: Block, s: ProjectSettings): string {
           : ''
       const wrapper = alignClass ? `<div class="${alignClass}">` : ''
       const wrapperClose = alignClass ? '</div>' : ''
-      return `    ${wrapper}<a href="${escape(block.href)}" style="${btnStyle}" class="inline-block rounded-md font-medium ${sizes[block.size]} mb-4">${escape(block.label)}</a>${wrapperClose}`
+      return `    ${wrapper}<a href="${escape(block.href)}" style="${btnStyle}" class="inline-block rounded-md font-medium ${sizes[block.size]}">${escape(block.label)}</a>${wrapperClose}`
     }
     case 'divider': {
-      return `    <hr class="${block.thickness} ${block.color} ${block.style === 'dashed' ? 'border-dashed' : 'border-solid'} my-4" />`
+      return `    <hr class="${block.thickness} ${block.color} ${block.style === 'dashed' ? 'border-dashed' : 'border-solid'}" />`
     }
     case 'spacer': {
       return `    <div class="${block.height}"></div>`
@@ -82,16 +82,16 @@ function renderBlock(block: Block, s: ProjectSettings): string {
       const wrapper = alignClass ? `<div class="${alignClass}">` : ''
       const wrapperClose = alignClass ? '</div>' : ''
       if (block.elementType === 'text') {
-        return `    ${wrapper}<span class="inline-block ${sizes[block.size]} mb-4">${escape(block.label)}</span>${wrapperClose}`
+        return `    ${wrapper}<span class="inline-block ${sizes[block.size]}">${escape(block.label)}</span>${wrapperClose}`
       }
       if (block.elementType === 'link') {
-        return `    ${wrapper}<a href="${escape(block.href)}" class="inline-block font-medium underline text-blue-600 ${sizes[block.size]} mb-4">${escape(block.label)}</a>${wrapperClose}`
+        return `    ${wrapper}<a href="${escape(block.href)}" class="inline-block font-medium underline text-blue-600 ${sizes[block.size]}">${escape(block.label)}</a>${wrapperClose}`
       }
       const btnStyle =
         block.variant === 'primary'
           ? `background-color:${s.primaryColor};color:${s.primaryTextColor};`
           : `background-color:${s.secondaryColor};color:${s.secondaryTextColor};border:1px solid ${s.secondaryBorderColor};`
-      return `    ${wrapper}<a href="${escape(block.href)}" style="${btnStyle}" class="inline-block rounded-md font-medium ${sizes[block.size]} mb-4">${escape(block.label)}</a>${wrapperClose}`
+      return `    ${wrapper}<a href="${escape(block.href)}" style="${btnStyle}" class="inline-block rounded-md font-medium ${sizes[block.size]}">${escape(block.label)}</a>${wrapperClose}`
     }
   }
 }
@@ -111,7 +111,9 @@ export function exportToHtml(project: Project): string {
 </head>
 <body class="font-sans antialiased" style="background-color:${s.backgroundColor}">
   <div class="max-w-3xl mx-auto px-4 py-12">
+    <div class="flex flex-col gap-4">
 ${blocks}
+    </div>
   </div>
 </body>
 </html>`
