@@ -3,7 +3,7 @@ import type { HeadingBlock } from '../../../types/project'
 import { useBuilderStore } from '../../../store/builderStore'
 import { Input } from '../../ui/Input'
 import { Select } from '../../ui/Select'
-import { ColorPicker } from '../../ui/ColorPicker'
+import { ColorField } from '../../ui/ColorField'
 
 interface Props { block: HeadingBlock }
 
@@ -64,7 +64,7 @@ export function HeadingEditor({ block }: Props) {
         options={fontSizeOptions}
         onChange={(e) => update({ fontSize: e.target.value })}
       />
-      <ColorPicker
+      <ColorField
         label="Color"
         value={block.color}
         onChange={(color) => update({ color })}

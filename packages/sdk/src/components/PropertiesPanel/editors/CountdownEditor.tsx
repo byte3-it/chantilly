@@ -3,7 +3,7 @@ import type { CountdownBlock } from '../../../types/project'
 import { useBuilderStore } from '../../../store/builderStore'
 import { Input } from '../../ui/Input'
 import { Select } from '../../ui/Select'
-import { ColorPicker } from '../../ui/ColorPicker'
+import { ColorField } from '../../ui/ColorField'
 
 interface Props { block: CountdownBlock }
 
@@ -40,7 +40,7 @@ export function CountdownEditor({ block }: Props) {
         options={alignOptions}
         onChange={(e) => update({ textAlign: e.target.value as CountdownBlock['textAlign'] })}
       />
-      <ColorPicker
+      <ColorField
         label="Color"
         value={block.color}
         onChange={(color) => update({ color })}

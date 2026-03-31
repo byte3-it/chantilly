@@ -30,7 +30,7 @@ function alignToFlex(textAlign: string) {
 function RenderHeading({ block }: { block: HeadingBlock }) {
   const Tag = block.level as keyof JSX.IntrinsicElements
   return (
-    <Tag className={`${block.textAlign} ${block.color} ${block.fontSize} font-bold`}>
+    <Tag style={{ color: block.color }} className={`${block.textAlign} ${block.fontSize} font-bold`}>
       {block.text}
     </Tag>
   )
@@ -38,7 +38,7 @@ function RenderHeading({ block }: { block: HeadingBlock }) {
 
 function RenderText({ block }: { block: TextBlock }) {
   return (
-    <p className={`${block.textAlign} ${block.color} ${block.fontSize}`}>
+    <p style={{ color: block.color }} className={`${block.textAlign} ${block.fontSize}`}>
       {block.content}
     </p>
   )
@@ -80,7 +80,8 @@ function RenderDivider({ block }: { block: DividerBlock }) {
   return (
     <div className="py-2">
       <hr
-        className={`${block.thickness} ${block.color} ${block.style === 'dashed' ? 'border-dashed' : 'border-solid'}`}
+        style={{ borderColor: block.color }}
+        className={`${block.thickness} ${block.style === 'dashed' ? 'border-dashed' : 'border-solid'}`}
       />
     </div>
   )
@@ -142,14 +143,14 @@ function RenderCountdown({ block }: { block: CountdownBlock }) {
   return (
     <div className={`flex flex-col gap-2 ${alignClass}`}>
       {block.label && (
-        <p className={`text-sm font-medium opacity-70 ${block.color} ${block.textAlign}`}>
+        <p style={{ color: block.color }} className={`text-sm font-medium opacity-70 ${block.textAlign}`}>
           {block.label}
         </p>
       )}
       {timeLeft.expired ? (
-        <p className={`text-sm font-medium ${block.color} ${block.textAlign}`}>Time's up!</p>
+        <p style={{ color: block.color }} className={`text-sm font-medium ${block.textAlign}`}>Time's up!</p>
       ) : (
-        <div className={`flex gap-4 ${block.color}`}>
+        <div style={{ color: block.color }} className="flex gap-4">
           <CountdownUnit value={timeLeft.days} label="Days" />
           <CountdownUnit value={timeLeft.hours} label="Hours" />
           <CountdownUnit value={timeLeft.minutes} label="Min" />

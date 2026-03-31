@@ -13,10 +13,10 @@ function renderBlock(block: Block, s: ProjectSettings): string {
   switch (block.type) {
     case 'heading': {
       const tag = block.level
-      return `    <${tag} class="${block.textAlign} ${block.color} ${block.fontSize} font-bold">${escape(block.text)}</${tag}>`
+      return `    <${tag} class="${block.textAlign} ${block.fontSize} font-bold" style="color:${block.color}">${escape(block.text)}</${tag}>`
     }
     case 'text': {
-      return `    <p class="${block.textAlign} ${block.color} ${block.fontSize}">${escape(block.content)}</p>`
+      return `    <p class="${block.textAlign} ${block.fontSize}" style="color:${block.color}">${escape(block.content)}</p>`
     }
     case 'image': {
       if (!block.src) return ''
@@ -47,7 +47,7 @@ function renderBlock(block: Block, s: ProjectSettings): string {
       return `    ${wrapper}<a href="${escape(block.href)}" style="${btnStyle}" class="inline-block rounded-md font-medium ${sizes[block.size]}">${escape(block.label)}</a>${wrapperClose}`
     }
     case 'divider': {
-      return `    <hr class="${block.thickness} ${block.color} ${block.style === 'dashed' ? 'border-dashed' : 'border-solid'}" />`
+      return `    <hr class="${block.thickness} ${block.style === 'dashed' ? 'border-dashed' : 'border-solid'}" style="border-color:${block.color}" />`
     }
     case 'spacer': {
       return `    <div class="${block.height}"></div>`
@@ -61,8 +61,8 @@ function renderBlock(block: Block, s: ProjectSettings): string {
           ? 'flex flex-col items-end'
           : 'flex flex-col items-start'
       return `    <div class="${alignWrap}">
-      ${block.label ? `<p class="text-sm font-medium opacity-70 ${block.color} mb-2">${escape(block.label)}</p>` : ''}
-      <div id="${safeId}" class="flex gap-6 ${block.color}">
+      ${block.label ? `<p class="text-sm font-medium opacity-70" style="color:${block.color}">${escape(block.label)}</p>` : ''}
+      <div id="${safeId}" class="flex gap-6" style="color:${block.color}">
         <div class="flex flex-col items-center"><span id="${safeId}_d" class="text-4xl font-bold tabular-nums">00</span><span class="text-xs uppercase tracking-widest mt-1 opacity-60">Days</span></div>
         <div class="flex flex-col items-center"><span id="${safeId}_h" class="text-4xl font-bold tabular-nums">00</span><span class="text-xs uppercase tracking-widest mt-1 opacity-60">Hours</span></div>
         <div class="flex flex-col items-center"><span id="${safeId}_m" class="text-4xl font-bold tabular-nums">00</span><span class="text-xs uppercase tracking-widest mt-1 opacity-60">Min</span></div>

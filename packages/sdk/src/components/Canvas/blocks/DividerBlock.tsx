@@ -16,7 +16,8 @@ export function DividerBlock({ block, isSelected, onClick }: Props) {
       }`}
     >
       <hr
-        className={`${block.thickness} ${block.color} ${block.style === 'dashed' ? 'border-dashed' : 'border-solid'}`}
+        style={{ borderColor: block.color }}
+        className={`${block.thickness} ${block.style === 'dashed' ? 'border-dashed' : 'border-solid'}`}
       />
     </div>
   )

@@ -2,7 +2,7 @@ import React from 'react'
 import { X } from 'lucide-react'
 import { useBuilderStore } from '../../store/builderStore'
 import { DEFAULT_PROJECT_SETTINGS } from '../../types/project'
-import { ColorField } from './ColorField'
+import { ColorField } from '../ui/ColorField'
 import { Input } from '../ui/Input'
 
 interface Props {

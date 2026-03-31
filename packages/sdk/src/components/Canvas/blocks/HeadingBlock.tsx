@@ -12,7 +12,8 @@ export function HeadingBlock({ block, isSelected, onClick }: Props) {
   return (
     <Tag
       onClick={onClick}
-      className={`${block.textAlign} ${block.color} ${block.fontSize} font-bold cursor-pointer rounded px-1 -mx-1 outline-none ${
+      style={{ color: block.color }}
+      className={`${block.textAlign} ${block.fontSize} font-bold cursor-pointer rounded px-1 -mx-1 outline-none ${
         isSelected ? 'ring-2 ring-blue-500' : 'hover:ring-1 hover:ring-gray-300'
       }`}
     >

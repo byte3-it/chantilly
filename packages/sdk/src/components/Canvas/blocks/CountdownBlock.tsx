@@ -65,14 +65,14 @@ export function CountdownBlock({ block, isSelected, onClick }: Props) {
     >
       <div className={`flex flex-col gap-2 ${alignClass}`}>
         {block.label && (
-          <p className={`text-sm font-medium opacity-70 ${block.color} ${block.textAlign}`}>
+          <p style={{ color: block.color }} className={`text-sm font-medium opacity-70 ${block.textAlign}`}>
             {block.label}
           </p>
         )}
         {timeLeft.expired ? (
-          <p className={`text-sm font-medium ${block.color} ${block.textAlign}`}>Time's up!</p>
+          <p style={{ color: block.color }} className={`text-sm font-medium ${block.textAlign}`}>Time's up!</p>
         ) : (
-          <div className={`flex gap-4 ${block.color}`}>
+          <div style={{ color: block.color }} className="flex gap-4">
             <Unit value={timeLeft.days} label="Days" />
             <Unit value={timeLeft.hours} label="Hours" />
             <Unit value={timeLeft.minutes} label="Min" />

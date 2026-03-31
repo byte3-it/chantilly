@@ -2,7 +2,7 @@ import React from 'react'
 import type { TextBlock } from '../../../types/project'
 import { useBuilderStore } from '../../../store/builderStore'
 import { Select } from '../../ui/Select'
-import { ColorPicker } from '../../ui/ColorPicker'
+import { ColorField } from '../../ui/ColorField'
 
 interface Props { block: TextBlock }
 
@@ -46,7 +46,7 @@ export function TextEditor({ block }: Props) {
         options={fontSizeOptions}
         onChange={(e) => update({ fontSize: e.target.value })}
       />
-      <ColorPicker
+      <ColorField
         label="Color"
         value={block.color}
         onChange={(color) => update({ color })}

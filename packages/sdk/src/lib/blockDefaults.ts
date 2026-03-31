@@ -12,7 +12,7 @@ export function createDefaultBlock(type: BlockType): Block {
         text: 'New Heading',
         level: 'h2',
         textAlign: 'text-left',
-        color: 'text-gray-900',
+        color: '#111827',
         fontSize: 'text-2xl',
       }
     case 'text':
@@ -21,7 +21,7 @@ export function createDefaultBlock(type: BlockType): Block {
         type: 'text',
         content: 'Add your text content here.',
         textAlign: 'text-left',
-        color: 'text-gray-700',
+        color: '#374151',
         fontSize: 'text-base',
       }
     case 'image':
@@ -48,7 +48,7 @@ export function createDefaultBlock(type: BlockType): Block {
         id,
         type: 'divider',
         style: 'solid',
-        color: 'border-gray-300',
+        color: '#D1D5DB',
         thickness: 'border',
       }
     case 'spacer':
@@ -67,7 +67,7 @@ export function createDefaultBlock(type: BlockType): Block {
         targetDate: sevenDaysFromNow,
         label: 'Offer ends in',
         textAlign: 'text-center',
-        color: 'text-gray-900',
+        color: '#111827',
       }
     }
   }

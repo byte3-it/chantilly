@@ -2,7 +2,7 @@ import React from 'react'
 import type { DividerBlock } from '../../../types/project'
 import { useBuilderStore } from '../../../store/builderStore'
 import { Select } from '../../ui/Select'
-import { ColorPicker } from '../../ui/ColorPicker'
+import { ColorField } from '../../ui/ColorField'
 
 interface Props { block: DividerBlock }
 
@@ -35,10 +35,9 @@ export function DividerEditor({ block }: Props) {
         options={thicknessOptions}
         onChange={(e) => update({ thickness: e.target.value as DividerBlock['thickness'] })}
       />
-      <ColorPicker
+      <ColorField
         label="Color"
         value={block.color}
-        mode="border"
         onChange={(color) => update({ color })}
       />
     </div>
