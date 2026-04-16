@@ -1,5 +1,6 @@
 import type { Block, Project, ProjectSettings } from '../types/project'
 import { DEFAULT_PROJECT_SETTINGS } from '../types/project'
+import { parseInlineFormattingToHtml } from '../lib/parseInlineFormatting'
 
 function escape(str: string): string {
   return str
@@ -16,7 +17,7 @@ function renderBlock(block: Block, s: ProjectSettings): string {
       return `    <${tag} class="${block.textAlign} ${block.fontSize} font-bold" style="color:${block.color}">${escape(block.text)}</${tag}>`
     }
     case 'text': {
-      return `    <p class="${block.textAlign} ${block.fontSize}" style="color:${block.color}">${escape(block.content)}</p>`
+      return `    <p class="${block.textAlign} ${block.fontSize}" style="color:${block.color}">${parseInlineFormattingToHtml(escape(block.content))}</p>`
     }
     case 'image': {
       if (!block.src) return ''

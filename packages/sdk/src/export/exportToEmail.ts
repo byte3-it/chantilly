@@ -1,5 +1,6 @@
 import type { Block, Project, ProjectSettings } from '../types/project'
 import { DEFAULT_PROJECT_SETTINGS } from '../types/project'
+import { parseInlineFormattingToHtml } from '../lib/parseInlineFormatting'
 
 function escape(str: string): string {
   return str
@@ -73,7 +74,7 @@ function renderBlock(block: Block, s: ProjectSettings): string {
 
     case 'text': {
       const style = `margin:0;${FONT_SIZE[block.fontSize] ?? ''}${TEXT_ALIGN[block.textAlign] ?? ''}color:${block.color};`
-      return row(`          <p style="${style}">${escape(block.content)}</p>`)
+      return row(`          <p style="${style}">${parseInlineFormattingToHtml(escape(block.content))}</p>`)
     }
 
     case 'image': {

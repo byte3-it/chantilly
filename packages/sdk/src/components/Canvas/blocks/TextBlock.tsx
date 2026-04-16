@@ -1,5 +1,6 @@
 import React from 'react'
 import type { TextBlock as TextBlockType } from '../../../types/project'
+import { parseInlineFormatting } from '../../../lib/parseInlineFormatting'
 
 interface Props {
   block: TextBlockType
@@ -16,7 +17,9 @@ export function TextBlock({ block, isSelected, onClick }: Props) {
         isSelected ? 'ring-2 ring-blue-500' : 'hover:ring-1 hover:ring-gray-300'
       }`}
     >
-      {block.content || <span className="text-gray-400 italic">Empty text block</span>}
+      {block.content
+        ? parseInlineFormatting(block.content)
+        : <span className="text-gray-400 italic">Empty text block</span>}
     </p>
   )
 }
