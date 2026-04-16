@@ -18,11 +18,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
 
       - run: npm ci
 
       - run: npm run build
         working-directory: packages/sdk
 
-      - run: npm publish --access public
+      - run: npm publish --access public --provenance
         working-directory: packages/sdk
