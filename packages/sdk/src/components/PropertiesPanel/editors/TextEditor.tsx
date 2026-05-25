@@ -29,12 +29,38 @@ export function TextEditor({ block }: Props) {
     if (!ta) return
     const { selectionStart, selectionEnd, value } = ta
     const selected = value.slice(selectionStart, selectionEnd)
-    const newContent =
-      value.slice(0, selectionStart) + marker + selected + marker + value.slice(selectionEnd)
+    const ml = marker.length
+
+    let newContent: string
+    let newStart: number
+    let newEnd: number
+
+    // Toggle off: selection itself contains the markers (*bold*)
+    if (selected.startsWith(marker) && selected.endsWith(marker) && selected.length > ml * 2) {
+      const inner = selected.slice(ml, -ml)
+      newContent = value.slice(0, selectionStart) + inner + value.slice(selectionEnd)
+      newStart = selectionStart
+      newEnd = selectionStart + inner.length
+    // Toggle off: markers sit immediately outside the selection
+    } else if (
+      selectionStart >= ml &&
+      value.slice(selectionStart - ml, selectionStart) === marker &&
+      value.slice(selectionEnd, selectionEnd + ml) === marker
+    ) {
+      newContent = value.slice(0, selectionStart - ml) + selected + value.slice(selectionEnd + ml)
+      newStart = selectionStart - ml
+      newEnd = newStart + selected.length
+    // Toggle on: wrap selection with markers
+    } else {
+      newContent = value.slice(0, selectionStart) + marker + selected + marker + value.slice(selectionEnd)
+      newStart = selectionStart + ml
+      newEnd = selectionEnd + ml
+    }
+
     update({ content: newContent })
     requestAnimationFrame(() => {
       ta.focus()
-      ta.setSelectionRange(selectionStart + marker.length, selectionEnd + marker.length)
+      ta.setSelectionRange(newStart, newEnd)
     })
   }
 
