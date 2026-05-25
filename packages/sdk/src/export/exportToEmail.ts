@@ -35,9 +35,15 @@ const IMG_WIDTH: Record<string, string> = {
 }
 
 const SPACER_PADDING: Record<string, string> = {
+  'py-1':  '4px',
+  'py-2':  '8px',
+  'py-3':  '12px',
   'py-4':  '16px',
+  'py-6':  '24px',
   'py-8':  '32px',
+  'py-10': '40px',
   'py-12': '48px',
+  'py-16': '64px',
   'py-20': '80px',
 }
 

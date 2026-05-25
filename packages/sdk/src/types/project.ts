@@ -67,7 +67,7 @@ export interface DividerBlock extends BaseBlock {
 
 export interface SpacerBlock extends BaseBlock {
   type: 'spacer'
-  height: 'py-4' | 'py-8' | 'py-12' | 'py-20'
+  height: 'py-1' | 'py-2' | 'py-3' | 'py-4' | 'py-6' | 'py-8' | 'py-10' | 'py-12' | 'py-16' | 'py-20'
 }
 
 export interface CountdownBlock extends BaseBlock {
