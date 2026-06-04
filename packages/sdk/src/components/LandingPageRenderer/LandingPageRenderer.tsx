@@ -38,7 +38,10 @@ function RenderHeading({ block }: { block: HeadingBlock }) {
 
 function RenderText({ block }: { block: TextBlock }) {
   return (
-    <p style={{ color: block.color }} className={`${block.textAlign} ${block.fontSize}`}>
+    <p
+      style={{ color: block.color, backgroundColor: block.backgroundColor || undefined, whiteSpace: 'pre-wrap' }}
+      className={`${block.textAlign} ${block.fontSize}${block.backgroundColor ? ' rounded px-4 py-3' : ''}`}
+    >
       {block.content}
     </p>
   )

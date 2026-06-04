@@ -80,6 +80,10 @@ function renderBlock(block: Block, s: ProjectSettings): string {
 
     case 'text': {
       const style = `margin:0;${FONT_SIZE[block.fontSize] ?? ''}${TEXT_ALIGN[block.textAlign] ?? ''}color:${block.color};`
+      if (block.backgroundColor) {
+        const bannerStyle = `background-color:${block.backgroundColor};padding:12px 16px;border-radius:4px;`
+        return row(`          <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="${bannerStyle}"><p style="${style}">${parseInlineFormattingToHtml(escape(block.content))}</p></td></tr></table>`)
+      }
       return row(`          <p style="${style}">${parseInlineFormattingToHtml(escape(block.content))}</p>`)
     }
 
