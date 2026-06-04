@@ -12,8 +12,8 @@ export function TextBlock({ block, isSelected, onClick }: Props) {
   return (
     <p
       onClick={onClick}
-      style={{ color: block.color, whiteSpace: 'pre-wrap' }}
-      className={`${block.textAlign} ${block.fontSize} cursor-pointer rounded px-1 -mx-1 ${
+      style={{ color: block.color, whiteSpace: 'pre-wrap', backgroundColor: block.backgroundColor || undefined }}
+      className={`${block.textAlign} ${block.fontSize} cursor-pointer rounded ${block.backgroundColor ? 'px-4 py-3 -mx-1' : 'px-1 -mx-1'} ${
         isSelected ? 'ring-2 ring-blue-500' : 'hover:ring-1 hover:ring-gray-300'
       }`}
     >

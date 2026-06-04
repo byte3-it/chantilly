@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
 
 interface Props {
-  label: string
+  label?: string
   value: string
   onChange: (color: string) => void
 }
@@ -24,7 +24,7 @@ export function ColorField({ label, value, onChange }: Props) {
 
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-xs font-medium text-gray-600">{label}</label>
+      {label && <label className="text-xs font-medium text-gray-600">{label}</label>}
       <div ref={containerRef} className="relative">
         <button
           type="button"

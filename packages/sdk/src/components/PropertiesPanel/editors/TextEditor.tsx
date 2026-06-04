@@ -122,6 +122,31 @@ export function TextEditor({ block }: Props) {
         value={block.color}
         onChange={(color) => update({ color })}
       />
+      <div className="flex flex-col gap-1.5">
+        <div className="flex items-center justify-between">
+          <label className="text-xs font-medium text-gray-600">Background color</label>
+          <button
+            type="button"
+            onClick={() => update({ backgroundColor: block.backgroundColor ? undefined : '#f3f4f6' })}
+            className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-none ${
+              block.backgroundColor ? 'bg-blue-500' : 'bg-gray-200'
+            }`}
+          >
+            <span
+              className={`pointer-events-none inline-block h-4 w-4 rounded-full bg-white shadow transform transition duration-200 ${
+                block.backgroundColor ? 'translate-x-4' : 'translate-x-0'
+              }`}
+            />
+          </button>
+        </div>
+        {block.backgroundColor && (
+          <ColorField
+            label=""
+            value={block.backgroundColor}
+            onChange={(backgroundColor) => update({ backgroundColor })}
+          />
+        )}
+      </div>
     </div>
   )
 }

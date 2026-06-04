@@ -17,7 +17,8 @@ function renderBlock(block: Block, s: ProjectSettings): string {
       return `    <${tag} class="${block.textAlign} ${block.fontSize} font-bold" style="color:${block.color}">${escape(block.text)}</${tag}>`
     }
     case 'text': {
-      return `    <p class="${block.textAlign} ${block.fontSize}" style="color:${block.color}">${parseInlineFormattingToHtml(escape(block.content))}</p>`
+      const bgStyle = block.backgroundColor ? `;background-color:${block.backgroundColor};padding:0.75rem 1rem;border-radius:0.25rem` : ''
+      return `    <p class="${block.textAlign} ${block.fontSize}" style="color:${block.color}${bgStyle}">${parseInlineFormattingToHtml(escape(block.content))}</p>`
     }
     case 'image': {
       if (!block.src) return ''

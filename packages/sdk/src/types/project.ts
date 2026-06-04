@@ -39,6 +39,7 @@ export interface TextBlock extends BaseBlock {
   textAlign: TailwindTextAlign
   color: string
   fontSize: string
+  backgroundColor?: string
 }
 
 export interface ImageBlock extends BaseBlock {
