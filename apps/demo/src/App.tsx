@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
-import { Zap, ExternalLink, Type } from 'lucide-react'
+import { Zap, ExternalLink, Type, Info, Copy } from 'lucide-react'
 import { LandingPageBuilder, LandingPageRenderer, exportProject } from '@byte3-it/chantilly'
 import type { Project, CustomBlockDefinition, TemplateDefinition } from '@byte3-it/chantilly'
 import { saveProject, loadProject } from './mockStorage'
@@ -21,6 +21,11 @@ const CUSTOM_BLOCKS: CustomBlockDefinition[] = [
       trackingId: 'hero-cta',
       campaign: 'homepage',
     },
+    actionButton: {
+      icon: <Info size={14} />,
+      title: 'CTA Button info',
+      onClick: (def: CustomBlockDefinition) => alert(`Block: ${def.id}\nTracking: ${def.defaults?.trackingId}`),
+    },
   },
   {
     id: 'docs-link',
@@ -34,6 +39,11 @@ const CUSTOM_BLOCKS: CustomBlockDefinition[] = [
       textAlign: 'text-left',
       rel: 'noopener noreferrer',
       target: '_blank',
+    },
+    actionButton: {
+      icon: <Copy size={14} />,
+      title: 'Copy docs URL',
+      onClick: (def: CustomBlockDefinition) => navigator.clipboard.writeText(String(def.defaults?.href ?? '')),
     },
   },
   {

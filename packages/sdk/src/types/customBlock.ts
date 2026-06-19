@@ -14,6 +14,11 @@ export interface CustomBlockDefinition {
     textAlign?: TailwindTextAlign
     [key: string]: unknown
   }
+  actionButton?: {
+    icon: ReactNode
+    title?: string
+    onClick: (def: CustomBlockDefinition) => void
+  }
 }
 
 export interface CustomBlock {

@@ -40,6 +40,15 @@ function CustomPaletteItem({ def }: { def: CustomBlockDefinition }) {
         <span className="text-violet-500 flex-shrink-0">{def.icon}</span>
         <span className="text-sm font-medium text-violet-700 truncate">{def.label}</span>
       </div>
+      {def.actionButton && (
+        <button
+          onClick={() => def.actionButton!.onClick(def)}
+          className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 p-0.5 rounded hover:bg-violet-100 text-violet-500 hover:text-violet-800"
+          title={def.actionButton.title ?? def.label}
+        >
+          {def.actionButton.icon}
+        </button>
+      )}
       <button
         onClick={() => addBlockDirect(createCustomBlock(def))}
         className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 p-0.5 rounded hover:bg-violet-100 text-violet-500 hover:text-violet-800"
