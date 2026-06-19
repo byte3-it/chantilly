@@ -11,7 +11,7 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "type-check": "turbo run type-check",
-    "release": "tsx scripts/release.ts"
+    "release": "tsx scripts/release.mts"
   },
   "packageManager": "npm@10.8.1",
   "devDependencies": {
