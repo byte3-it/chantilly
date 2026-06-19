@@ -10,10 +10,13 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "type-check": "turbo run type-check"
+    "type-check": "turbo run type-check",
+    "release": "tsx scripts/release.ts"
   },
   "packageManager": "npm@10.8.1",
   "devDependencies": {
+    "@inquirer/prompts": "7.10.1",
+    "tsx": "4.22.4",
     "turbo": "^2.0.0",
     "typescript": "^5.4.5"
   }
