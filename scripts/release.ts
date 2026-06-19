@@ -30,6 +30,16 @@ const version =
     ? await input({ message: 'Enter version (x.y.z):' })
     : chosen
 
+const gitStatus = execSync('git status --porcelain', { encoding: 'utf-8' }).trim()
+if (gitStatus) {
+  console.log('\nWarning: there are pending git changes:\n' + gitStatus)
+  const continueWithDirty = await confirm({ message: 'Proceed anyway?', default: false })
+  if (!continueWithDirty) {
+    console.log('Aborted.')
+    process.exit(0)
+  }
+}
+
 console.log(`
 This will:
   1. Bump packages/sdk/package.json  ${current}  →  ${version}
