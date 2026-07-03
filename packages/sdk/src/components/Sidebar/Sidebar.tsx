@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useDraggable } from "@dnd-kit/core";
-import { Type, AlignLeft, Image, MousePointer, Minus, Square, Timer, Plus } from "lucide-react";
+import { Type, AlignLeft, Image, MousePointer, Minus, Square, Timer, Plus, Table2 } from "lucide-react";
 import type { BlockType } from "../../types/project";
 import { useBuilderStore } from "../../store/builderStore";
 import { BlockPaletteItem } from "./BlockPaletteItem";
@@ -16,6 +16,7 @@ const BLOCK_TYPES: { type: BlockType; label: string; icon: React.ReactNode }[] =
   { type: "divider", label: "Divider", icon: <Minus size={16} /> },
   { type: "spacer", label: "Spacer", icon: <Square size={16} /> },
   { type: "countdown", label: "Countdown", icon: <Timer size={16} /> },
+  { type: "table", label: "Table", icon: <Table2 size={16} /> },
 ];
 
 function CustomPaletteItem({ def }: { def: CustomBlockDefinition }) {

@@ -73,6 +73,22 @@ function renderBlock(block: Block, s: ProjectSettings): string {
     </div>
     <script>(function(){var t=new Date("${escape(block.targetDate)}");function u(){var d=t-new Date();if(d<0)d=0;var p=function(n){return String(Math.floor(n)).padStart(2,"0");};document.getElementById("${safeId}_d").textContent=p(d/86400000);document.getElementById("${safeId}_h").textContent=p((d%86400000)/3600000);document.getElementById("${safeId}_m").textContent=p((d%3600000)/60000);document.getElementById("${safeId}_s").textContent=p((d%60000)/1000);}u();setInterval(u,1000);})();</script>`
     }
+    case 'table': {
+      if (block.rows.length === 0) return ''
+      const borderCls = block.showBorders ? 'border-collapse' : ''
+      const cellStyle = `color:${block.textColor};${block.showBorders ? `border:1px solid ${block.borderColor};` : ''}`
+      const rowsHtml = block.rows
+        .map(
+          (row) =>
+            `      <tr>${row
+              .map((cell) => `<td class="px-2.5 py-1.5 text-sm align-top" style="${cellStyle}">${escape(cell)}</td>`)
+              .join('')}</tr>`
+        )
+        .join('\n')
+      return `    <table class="w-full ${borderCls}">
+${rowsHtml}
+    </table>`
+    }
     case 'custom': {
       const sizes = { sm: 'px-3 py-1.5 text-sm', md: 'px-5 py-2 text-base', lg: 'px-7 py-3 text-lg' }
       const alignClass =

@@ -12,6 +12,7 @@ import { DividerBlock } from './blocks/DividerBlock'
 import { SpacerBlock } from './blocks/SpacerBlock'
 import { CustomBlock } from './blocks/CustomBlock'
 import { CountdownBlock } from './blocks/CountdownBlock'
+import { TableBlock } from './blocks/TableBlock'
 
 interface Props {
   block: Block
@@ -27,6 +28,7 @@ function BlockRenderer({ block, isSelected, onClick }: { block: Block; isSelecte
     case 'divider': return <DividerBlock block={block} isSelected={isSelected} onClick={onClick} />
     case 'spacer': return <SpacerBlock block={block} isSelected={isSelected} onClick={onClick} />
     case 'countdown': return <CountdownBlock block={block} isSelected={isSelected} onClick={onClick} />
+    case 'table': return <TableBlock block={block} isSelected={isSelected} onClick={onClick} />
     case 'custom': return <CustomBlock block={block} isSelected={isSelected} onClick={onClick} />
   }
 }

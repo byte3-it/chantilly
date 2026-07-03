@@ -147,6 +147,21 @@ function renderBlock(block: Block, s: ProjectSettings): string {
       return row(`          <table cellpadding="0" cellspacing="0" border="0" align="${tableAlign}">${labelRow}<tr>${unitCell(pad(days), 'Days')}${unitCell(pad(hours), 'Hours')}${unitCell(pad(minutes), 'Min')}${unitCell(pad(seconds), 'Sec')}</tr></table>`)
     }
 
+    case 'table': {
+      if (block.rows.length === 0) return ''
+      const cellStyle = block.showBorders
+        ? `padding:6px 10px;font-size:14px;vertical-align:top;color:${block.textColor};border:1px solid ${block.borderColor};`
+        : `padding:6px 10px;font-size:14px;vertical-align:top;color:${block.textColor};`
+      const rowsHtml = block.rows
+        .map(
+          (r) =>
+            `<tr>${r.map((cell) => `<td style="${cellStyle}">${escape(cell)}</td>`).join('')}</tr>`
+        )
+        .join('')
+      const tableStyle = block.showBorders ? 'width:100%;border-collapse:collapse;' : 'width:100%;'
+      return row(`          <table cellpadding="0" cellspacing="0" border="0" style="${tableStyle}">${rowsHtml}</table>`)
+    }
+
     case 'custom': {
       const tdAlign =
         block.textAlign === 'text-center' ? 'center'

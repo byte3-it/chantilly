@@ -17,7 +17,7 @@ export const DEFAULT_PROJECT_SETTINGS: ProjectSettings = {
   secondaryTextColor: '#111827',
   secondaryBorderColor: '#d1d5db',
 }
-export type BlockType = 'heading' | 'text' | 'image' | 'button' | 'divider' | 'spacer' | 'countdown'
+export type BlockType = 'heading' | 'text' | 'image' | 'button' | 'divider' | 'spacer' | 'countdown' | 'table'
 
 interface BaseBlock {
   id: string
@@ -79,6 +79,14 @@ export interface CountdownBlock extends BaseBlock {
   color: string
 }
 
+export interface TableBlock extends BaseBlock {
+  type: 'table'
+  rows: string[][]
+  showBorders: boolean
+  borderColor: string
+  textColor: string
+}
+
 import type { CustomBlock } from './customBlock'
 export type { CustomBlock }
 
@@ -90,6 +98,7 @@ export type Block =
   | DividerBlock
   | SpacerBlock
   | CountdownBlock
+  | TableBlock
   | CustomBlock
 
 export interface Project {

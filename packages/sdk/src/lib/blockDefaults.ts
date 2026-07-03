@@ -70,5 +70,16 @@ export function createDefaultBlock(type: BlockType): Block {
         color: '#111827',
       }
     }
+    case 'table': {
+      const rows = Array.from({ length: 3 }, () => Array.from({ length: 3 }, () => ''))
+      return {
+        id,
+        type: 'table',
+        rows,
+        showBorders: true,
+        borderColor: '#D1D5DB',
+        textColor: '#111827',
+      }
+    }
   }
 }

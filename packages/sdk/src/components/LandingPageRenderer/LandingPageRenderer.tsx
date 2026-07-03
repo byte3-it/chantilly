@@ -10,6 +10,7 @@ import type {
   DividerBlock,
   SpacerBlock,
   CountdownBlock,
+  TableBlock,
   ProjectSettings,
 } from "../../types/project";
 import { DEFAULT_PROJECT_SETTINGS } from "../../types/project";
@@ -166,6 +167,27 @@ function RenderCountdown({ block }: { block: CountdownBlock }) {
   );
 }
 
+function RenderTable({ block }: { block: TableBlock }) {
+  const cellStyle: React.CSSProperties = block.showBorders
+    ? { border: `1px solid ${block.borderColor}`, padding: "6px 10px", verticalAlign: "top", color: block.textColor }
+    : { padding: "6px 10px", verticalAlign: "top", color: block.textColor };
+  return (
+    <table style={{ width: "100%", borderCollapse: block.showBorders ? "collapse" : undefined }}>
+      <tbody>
+        {block.rows.map((row, ri) => (
+          <tr key={ri}>
+            {row.map((cell, ci) => (
+              <td key={ci} style={cellStyle} className="text-sm">
+                {cell}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
 function RenderCustomBlock({ block, settings }: { block: CustomBlock; settings: ProjectSettings }) {
   const buttonStyle: React.CSSProperties =
     block.variant === "primary"
@@ -211,6 +233,8 @@ function RenderBlock({ block, settings }: { block: Block; settings: ProjectSetti
       return <RenderSpacer block={block} />;
     case "countdown":
       return <RenderCountdown block={block} />;
+    case "table":
+      return <RenderTable block={block} />;
     case "custom":
       return <RenderCustomBlock block={block} settings={settings} />;
   }

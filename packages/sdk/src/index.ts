@@ -18,6 +18,7 @@ export type {
   DividerBlock,
   SpacerBlock,
   CountdownBlock,
+  TableBlock,
   TailwindTextAlign,
   ProjectSettings,
   DEFAULT_PROJECT_SETTINGS,

@@ -9,6 +9,7 @@ import { DividerEditor } from './editors/DividerEditor'
 import { SpacerEditor } from './editors/SpacerEditor'
 import { CustomBlockEditor } from './editors/CustomBlockEditor'
 import { CountdownEditor } from './editors/CountdownEditor'
+import { TableEditor } from './editors/TableEditor'
 import type { Block } from '../../types/project'
 
 function EditorFor({ block }: { block: Block }) {
@@ -20,6 +21,7 @@ function EditorFor({ block }: { block: Block }) {
     case 'divider': return <DividerEditor block={block} />
     case 'spacer': return <SpacerEditor block={block} />
     case 'countdown': return <CountdownEditor block={block} />
+    case 'table': return <TableEditor block={block} />
     case 'custom': return <CustomBlockEditor block={block} />
   }
 }
@@ -32,6 +34,7 @@ const BLOCK_LABELS: Record<string, string> = {
   divider: 'Divider',
   spacer: 'Spacer',
   countdown: 'Countdown',
+  table: 'Table',
   custom: 'Custom Block',
 }
 
