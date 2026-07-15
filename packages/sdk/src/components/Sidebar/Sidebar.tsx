@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useDraggable } from "@dnd-kit/core";
-import { Type, AlignLeft, Image, MousePointer, Minus, Square, Timer, Plus, Table2 } from "lucide-react";
+import { Type, AlignLeft, Image, MousePointer, Minus, Square, Timer, Plus, Table2, ChevronRight } from "lucide-react";
 import type { BlockType } from "../../types/project";
 import { useBuilderStore } from "../../store/builderStore";
 import { BlockPaletteItem } from "./BlockPaletteItem";
@@ -67,12 +67,31 @@ export function Sidebar() {
   const isEmail = project.mode === 'email';
   const visibleBlockTypes = BLOCK_TYPES.filter((b) => !(isEmail && b.type === 'countdown'));
 
+  const hasCustomBlocks = customBlocks.length > 0;
+  // Client-only, ephemeral state: custom blocks collapsed by default, reset on remount/reload.
+  const [customExpanded, setCustomExpanded] = useState(false);
+
   return (
     <div className="w-64 bg-white border-r border-gray-200 flex flex-col">
-      <div className="px-4 py-3 border-b border-gray-200">
-        <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Blocks</h2>
-      </div>
-      {customBlocks.length > 0 && (
+      {hasCustomBlocks ? (
+        <button
+          type="button"
+          onClick={() => setCustomExpanded((v) => !v)}
+          aria-expanded={customExpanded}
+          className="w-full flex items-center gap-2 px-4 py-3 border-b border-gray-200 text-left hover:bg-gray-50 transition-colors"
+        >
+          <ChevronRight
+            size={14}
+            className={`text-gray-400 flex-shrink-0 transition-transform ${customExpanded ? "rotate-90" : ""}`}
+          />
+          <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Blocks</h2>
+        </button>
+      ) : (
+        <div className="px-4 py-3 border-b border-gray-200">
+          <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Blocks</h2>
+        </div>
+      )}
+      {hasCustomBlocks && customExpanded && (
         <div className="p-2 border-b border-gray-200">
           <div className="flex flex-col gap-0.5">
             {customBlocks.map((def) => (
