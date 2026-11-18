@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import type { CustomBlock as CustomBlockType } from '../../../types/customBlock'
 import { DEFAULT_PROJECT_SETTINGS } from '../../../types/project'
 import { useBuilderStore } from '../../../store/builderStore'
+import { CustomBlocksContext } from '../../CustomBlocksContext'
 
 interface Props {
   block: CustomBlockType
@@ -13,6 +14,9 @@ const sizeClasses = { sm: 'px-3 py-1.5 text-sm', md: 'px-5 py-2 text-base', lg: 
 
 export function CustomBlock({ block, isSelected, onClick }: Props) {
   const settings = { ...DEFAULT_PROJECT_SETTINGS, ...useBuilderStore((s) => s.project.settings) }
+  // Looked up from the definition, not stored on the block: blocks saved before the
+  // definition got a previewImage show it too
+  const previewImage = useContext(CustomBlocksContext).find((d) => d.id === block.definitionId)?.previewImage
 
   const alignClass =
     block.textAlign === 'text-center'
@@ -38,7 +42,17 @@ export function CustomBlock({ block, isSelected, onClick }: Props) {
       }`}
     >
       <div className={alignClass}>
-        {block.elementType === 'text' ? (
+        {previewImage ? (
+          <img
+            src={previewImage.src}
+            width={previewImage.width}
+            height={previewImage.height}
+            alt={previewImage.alt}
+            className="inline-block max-w-full"
+            style={{ width: previewImage.width, height: 'auto' }}
+            draggable={false}
+          />
+        ) : block.elementType === 'text' ? (
           <span className={`inline-block ${sizeClasses[block.size]}`}>
             {block.label || 'Text'}
           </span>
