@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
-import { Zap, ExternalLink, Type, Info, Copy } from 'lucide-react'
+import { Zap, ExternalLink, Type, Info, Copy, Image } from 'lucide-react'
 import { LandingPageBuilder, LandingPageRenderer, exportProject } from '@byte3-it/chantilly'
 import type { Project, CustomBlockDefinition, TemplateDefinition } from '@byte3-it/chantilly'
 import { saveProject, loadProject } from './mockStorage'
@@ -55,6 +55,27 @@ const CUSTOM_BLOCKS: CustomBlockDefinition[] = [
       label: 'No credit card required. Cancel anytime.',
       size: 'sm',
       textAlign: 'text-center',
+    },
+  },
+  {
+    // Placeholder replaced by the host app after export; the builder shows the image instead
+    id: 'store-badge',
+    label: 'Store Badge',
+    icon: <Image size={16} />,
+    elementType: 'text',
+    defaults: {
+      label: '{{storeBadge}}',
+      textAlign: 'text-center',
+    },
+    previewImage: {
+      src:
+        'data:image/svg+xml,' +
+        encodeURIComponent(
+          '<svg xmlns="http://www.w3.org/2000/svg" width="160" height="48"><rect width="160" height="48" rx="8" fill="#111"/><text x="80" y="30" fill="#fff" font-family="sans-serif" font-size="16" text-anchor="middle">Store badge</text></svg>',
+        ),
+      width: 160,
+      height: 48,
+      alt: 'Store badge',
     },
   },
 ]

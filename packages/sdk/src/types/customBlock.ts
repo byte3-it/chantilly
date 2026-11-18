@@ -19,6 +19,17 @@ export interface CustomBlockDefinition {
     title?: string
     onClick: (def: CustomBlockDefinition) => void
   }
+  /**
+   * Image shown in the builder canvas instead of the label, e.g. when the label is a
+   * placeholder the host app replaces with an image after export. Editor-only: it is not
+   * stored in the project and the export still outputs the label.
+   */
+  previewImage?: {
+    src: string
+    width: number
+    height: number
+    alt: string
+  }
 }
 
 export interface CustomBlock {

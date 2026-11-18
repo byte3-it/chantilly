@@ -111,6 +111,18 @@ const customBlocks: CustomBlockDefinition[] = [
 <LandingPageBuilder customBlocks={customBlocks} />
 ```
 
+When the label is a placeholder that your app replaces after export (e.g. `{{badge}}` → an `<img>`), set `previewImage` so the builder canvas shows the image instead of the placeholder text. It is editor-only: it is not stored in the project and the export still outputs the label.
+
+```tsx
+{
+  id: 'badge',
+  label: 'Badge',
+  elementType: 'text',
+  defaults: { label: '{{badge}}', textAlign: 'text-center' },
+  previewImage: { src: '/badge.png', width: 160, height: 48, alt: 'Badge' },
+}
+```
+
 ## Templates
 
 Supply starting-point projects that users can pick from the Templates modal:
